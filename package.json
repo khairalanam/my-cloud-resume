@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test": "jest --coverage",
+    "test-watch": "jest --watchAll",
+    "test-cover": "jest --verbose --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3"
+  }
+}
