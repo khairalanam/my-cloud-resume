@@ -1,11 +1,16 @@
 // utils
 const get = (selector, scope = document) => scope.querySelector(selector);
 const getAll = (selector, scope = document) => scope.querySelectorAll(selector);
+const typeItOut = (txt, selector, i = 0, scope = document, speed = 25) => {
+  if (i < txt.length) {
+    scope.getElementsByClassName(selector)[0].innerHTML += txt[i];
+    i++;
+    setTimeout(() => typeItOut(txt, selector, i, scope, speed), speed);
+  }
+};
 
 // typewriter animation
 if (document.getElementsByClassName("demo").length > 0) {
-  let i = 0;
-  let speed = 25;
   let txt = `khairalanam
             [Entry mode; press Ctrl+D to save and quit; press Ctrl+C to quit without saving]
 
@@ -16,15 +21,7 @@ if (document.getElementsByClassName("demo").length > 0) {
             - email me at: anaambasheer@gmail.com
             - i like tea ☕`;
 
-  function typeItOut() {
-    if (i < txt.length) {
-      document.getElementsByClassName("demo")[0].innerHTML += txt[i];
-      i++;
-      setTimeout(typeItOut, speed);
-    }
-  }
-
-  setTimeout(typeItOut, 1000);
+  setTimeout(() => typeItOut(txt), 1000);
 }
 
 // tabs section
@@ -59,7 +56,10 @@ async function updateCounter() {
   );
 
   let views = await response.json();
-  counter.textContent = `Views Count: ${views}`;
+  if (counter) counter.textContent = `Views Count: ${views}`;
+  return views;
 }
 
 updateCounter();
+
+module.exports = { get, getAll, typeItOut };
